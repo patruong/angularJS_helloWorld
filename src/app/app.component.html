@@ -1,0 +1,88 @@
+<h1>Angular</h1>
+
+<!-- ngFor and Change Detection -->
+<button (click)="onAdd()">Add</button>
+
+
+<!-- ngFor - note in angular.io search ngForOf to find ngFor properties such as index etc.-->
+<ul>
+    <li *ngFor="let course of courses; index as i">
+        {{i}} - {{ course.name }}
+        <button (click)="onChange(course)">Remove</button>
+    </li>
+    
+</ul>
+
+<ul>
+    <li *ngFor="let course of courses; even as isEven">
+        {{ course.name }} <span *ngIf="isEven">(EVEN)</span>
+    </li>
+</ul>
+
+<!-- ngSwitchCase -->
+<ul class="nav nav-pills">
+    <li [class.active]="viewMode == 'map'"><a (click)="viewMode = 'map'">Map View</a></li>
+    <li [class.active]="viewMode == 'list'"><a (click)="viewMode = 'list'">List View</a></li>
+</ul>
+<div [ngSwitch]="viewMode">
+    <div *ngSwitchCase="'map'">Map View Content</div>
+    <div *ngSwitchCase="'list'">List View Content</div>
+    <div *ngSwitchDefault>Otherwise</div>
+</div>
+
+<br/>
+
+
+<!--Hidden div-->
+<div [hidden]="courses.length == 0">
+    List of courses
+</div>
+<div [hidden]="courses.length > 0">
+    No courses yet
+</div>
+
+
+<!--if else for div statement-->
+<div *ngIf="courses.length > 0; then coursesList else noCourses"> </div>
+<ng-template #coursesList>
+    List of courses
+</ng-template>
+<ng-template #noCourses>
+    No courses yet
+</ng-template>
+
+<br/>
+
+<!--like button-->
+<like
+    [likesCount]="tweet.likesCount"
+    [isActive]="tweet.isLiked"
+></like>
+
+<bootstrap-panel>
+    <ng-container class="heading">Heading</ng-container>
+    <div class="body"></div>
+        <h2>Body</h2>
+        <p>Some content here...</p>
+</bootstrap-panel>
+
+<!-- <favorite></favorite> -->
+
+<favorite [isFavorite]="post.isFavorite" (change)="onFavoriteChanged($event)"></favorite>
+
+<br/>
+
+<input type="text" [(ngModel)]="title">
+<br>
+
+{{ title | titleCase }}
+
+<courses></courses>
+
+<!--<img [src]="imageUrl"/>-->
+<!--<button (click)="onClick()"></button>-->
+
+
+
+
+
